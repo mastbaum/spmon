@@ -1,0 +1,28 @@
+<div>
+  <style>
+    .crate-box {
+      width: 15%;
+      float: left;
+      text-align: center;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .alarm { background: #ffcccc; }
+  </style>
+  <div style="display: inline-block; width: 100%;">
+    <div ng-repeat="crate in crates">
+      <div style="margin-top: 0px;"
+        ng-class="{'alarm': crate.max_rate > getAlarmLevel(), 'crate-box': true, 'well': true}"
+        ng-click="transitionTo('cmos.crate', {'crateId': crate.id})">
+        <h4>Crate {{ crate.id }}</h4>
+        <strong>{{ crate.max_rate | number:5 }}</strong>
+        <p>{{ crate.id }}/{{ crate.max_card }}/{{ crate.max_channel }}</p>
+      </div>
+    </div>
+  </div>
+  <div style="display: inline-block;">
+    <label>Alarm threshold: </label>
+    <input type="text" ng-model="userAlarmLevel" placeholder="{{ getAlarmLevel() }}" ng-change="setAlarmLevel(userAlarmLevel)"/>
+  </div>
+</div>
+

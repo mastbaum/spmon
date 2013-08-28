@@ -1,0 +1,31 @@
+<div>
+  <style>
+    .crate-box {
+      width: 15%;
+      float: left;
+      text-align: center;
+      margin: 10px;
+      cursor: pointer;
+    }
+    .alarm {
+      font-weight: bold;
+      background: #ffcccc;
+    }
+  </style>
+  <h2 style="margin-top: 0px;">Crate {{ crateId }}</h2>
+  <div ng-repeat="card in crates[crateId].rates | reverse">
+    <div style="float: left; width: 6%; margin-left: 1px; padding: 0px; text-align: center;" class="well">
+      <h3>{{ 15-$index }}</h3>
+      <div ng-repeat="channel in card">
+        <div ng-class="{'alarm': channel > getAlarmLevel()}">
+          {{ channel | number:3 }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: inline-block;">
+    <label>Alarm threshold: </label>
+    <input type="text" ng-model="userAlarmLevel" placeholder="{{ getAlarmLevel() }}" ng-change="setAlarmLevel(userAlarmLevel)"/>
+  </div>
+</div>
+

@@ -1,0 +1,25 @@
+<div>
+  <h1>{{ title }}</h1>
+  <div class="row">
+    <div class="col-md-1" style="float: left; text-align: center;">
+      <div class="well well-small">
+        <a style="cursor: pointer;" ng-click="transitionTo($state.$current.parent+'.all')">All</a><hr/>
+        <ul class="nav nav-list">
+          <li ng-repeat="crate in crates" style="margin: 4px;">
+          <span style="padding: 2px; cursor: pointer;"
+            class="label"
+            ng-class="{'label-danger': crate.max_rate >= getAlarmLevel(), 'label-default': crate.max_rate < getAlarmLevel()}"
+            ng-click="transitionTo('cmos.crate', {'crateId': crate.id})">
+            {{ crate.id }}
+          </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div ui-view class="well" style="background: white;"></div>
+      <div ui-view="detail"></div>
+    </div>
+  </div>
+</div>
+
